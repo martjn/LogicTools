@@ -12,11 +12,19 @@ container {
 
 .tool-link {
     text-decoration: none;
-    color: #888844;
+    color: #336600;
 }
 
 .tool-link:hover {
     text-decoration: underline;
     font-weight: bolder;
-    color: #888844;
+    color: #336600;
+}
+
+.container-background {
+    background-color:#f6f6ee;
+}
+
+.nav-link:hover{
+    color: #336600;
 }
