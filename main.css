@@ -1,0 +1,22 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+.header {
+    background-color: #33331a;
+    color: white;
+}
+
+container {
+    background-color: #33331a;
+}
+
+.tool-link {
+    text-decoration: none;
+    color: #888844;
+}
+
+.tool-link:hover {
+    text-decoration: underline;
+    font-weight: bolder;
+    color: #888844;
+}
