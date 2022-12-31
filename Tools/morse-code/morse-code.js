@@ -1,9 +1,37 @@
+// initialize DOM elements
 const sourceText = document.getElementById("srctext");
 const translationText = document.getElementById("resulttext");
 const radioButton0 = document.getElementById('textToMorseRadioBtn');
 const radioButton1 = document.getElementById('morseToTextRadioBtn');
 
+const sourceCopyBtn = document.getElementById('src-copy');
+const sourcePasteBtn = document.getElementById('src-paste');
+const sourceOptionsBtn = document.getElementById('src-options');
+const sourceOptions = {
+    removeSpaces: document.getElementById('src-opt-remove-spaces'),
+    lettersOnly: document.getElementById('src-opt-letters-only'),
+    reverse: document.getElementById('src-opt-reverse'),
+    upper: document.getElementById('src-opt-upper'),
+    lower: document.getElementById('src-opt-lower'),
+    undo: document.getElementById('src-opt-undo'),
+    group: document.getElementById('src-options-group'),
+}
+
+const transCopyBtn = document.getElementById('trans-copy');
+const transOptionsBtn = document.getElementById('trans-copy');
+const transOptions = {
+    removeSpaces: document.getElementById('trans-opt-remove-spaces'),
+    lettersOnly: document.getElementById('trans-opt-letters-only'),
+    reverse: document.getElementById('trans-opt-reverse'),
+    upper: document.getElementById('trans-opt-upper'),
+    lower: document.getElementById('trans-opt-lower'),
+    undo: document.getElementById('trans-opt-undo'),
+    group: document.getElementById('trans-options-group'),
+}
+
 let mode = 0;
+let srcOptionsMode = 0;
+let transOptionsMode = 0;
 
 function textToMorse(){
     console.log('run textToMorse');
@@ -195,12 +223,14 @@ function setMode() {
         console.log("set mode 0");     
         mode = 0;
         sourceText.value = translationText.value;
+        sourceText.removeAttribute("placeholder");
         sourceText.placeholer = "Type message text here";
         translate();
     } else if (radioButton1.checked && mode !== 1) {
         console.log("set mode 1");
         mode = 1;
         sourceText.value = translationText.value;
+        sourceText.removeAttribute("placeholder");
         sourceText.placeholder = "Type morse code here, for example: .... . .-.. .-.. ---";
         translate();
     } else{
