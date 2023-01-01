@@ -1,6 +1,6 @@
 // initialize DOM elements
 const sourceText = document.getElementById("srctext");
-const translationText = document.getElementById("resulttext");
+const resultText = document.getElementById("resulttext");
 const radioButton0 = document.getElementById('textToMorseRadioBtn');
 const radioButton1 = document.getElementById('morseToTextRadioBtn');
 
@@ -15,26 +15,34 @@ const sourceOptions = {
     lower: document.getElementById('src-opt-lower'),
     undo: document.getElementById('src-opt-undo'),
     group: document.getElementById('src-options-group'),
+    groupNr: document.getElementById('src-options-group-nr'),
 }
 
-const transCopyBtn = document.getElementById('trans-copy');
-const transOptionsBtn = document.getElementById('trans-copy');
-const transOptions = {
-    removeSpaces: document.getElementById('trans-opt-remove-spaces'),
-    lettersOnly: document.getElementById('trans-opt-letters-only'),
-    reverse: document.getElementById('trans-opt-reverse'),
-    upper: document.getElementById('trans-opt-upper'),
-    lower: document.getElementById('trans-opt-lower'),
-    undo: document.getElementById('trans-opt-undo'),
-    group: document.getElementById('trans-options-group'),
+
+const resultCopyBtn = document.getElementById('result-copy');
+const resultOptionsBtn = document.getElementById('result-copy');
+const resultOptions = {
+    removeSpaces: document.getElementById('result-opt-remove-spaces'),
+    lettersOnly: document.getElementById('result-opt-letters-only'),
+    reverse: document.getElementById('result-opt-reverse'),
+    upper: document.getElementById('result-opt-upper'),
+    lower: document.getElementById('result-opt-lower'),
+    undo: document.getElementById('result-opt-undo'),
+    group: document.getElementById('result-options-group'),
+    groupNr: document.getElementById('result-options-group-nr'),
 }
+
+const sourceOptionsUndo = [];
+const resultOptionsUndo = [];
+let currentSourceText = "";
+let currentResultText = "";
 
 let mode = 0;
+let nr = 0;
 let srcOptionsMode = 0;
-let transOptionsMode = 0;
+let resultOptionsMode = 0;
 
 function textToMorse(){
-    console.log('run textToMorse');
     let originalText = sourceText.value.toUpperCase();
     let newText = originalText.replaceAll(" ", "/ ").replaceAll("A", ".- ").replaceAll("B", "-... ").replaceAll("C","-.-. ").replaceAll("D", "-.. ").replaceAll("E", ". ").replaceAll("F", "..-. ").replaceAll("G", "--. ").replaceAll("H", ".... ").replaceAll("I", ".. ").replaceAll("J", ".--- ").replaceAll("K", "-.- ").replaceAll("L", ".-.. ").replaceAll("M", "-- ").replaceAll("N", "-. ").replaceAll("O", "--- ").replaceAll("P", ".--. ").replaceAll("Q", "--.- ").replaceAll("R", ".-. ").replaceAll("S", "... ").replaceAll("T", "- ").replaceAll("U", "..- ").replaceAll("V", "...- ").replaceAll("W", ".-- ").replaceAll("X", "-..- ").replaceAll("Y", "-.-- ").replaceAll("Z", "--.. ").replaceAll("0", "----- ").replaceAll("1", ".---- ").replaceAll("2", "..--- ").replaceAll("3", "...-- ").replaceAll("4", "....- ").replaceAll("5", "..... ").replaceAll("6", "-.... ").replaceAll("7", "--... ").replaceAll("8", "---.. ").replaceAll("9", "----. ").replaceAll("Ä", ".-.- ").replaceAll("Õ", "Ö").replaceAll("Ö", "---. ").replaceAll("Ü", "..-- ").replaceAll("&", ".-... ").replaceAll("'", ".----. ").replaceAll("@", ".--.-. ").replaceAll(")", "-.--.- ").replaceAll("(", "-.--. ").replaceAll(":", "---... ").replaceAll(",", "--.-- ").replaceAll("=", "-...- ").replaceAll("!", "-.-.-- ").replaceAll("+", ".-.-. ").replaceAll('"', '.-..-. ').replaceAll("?", "..--.. ");
     return newText;
@@ -214,35 +222,210 @@ function morseToText(){
 function translate(){
     let translateText;
     (mode === 0) ? translateText = textToMorse() : translateText = morseToText();
-    translationText.value = translateText;
-    console.log('run translate');
+    resultText.value = translateText;
 }
 
 function setMode() {
     if(radioButton0.checked && mode !== 0){
         console.log("set mode 0");     
         mode = 0;
-        sourceText.value = translationText.value;
+        currentSourceText = resultText.value;
+        sourceText.value = resultText.value;
+        currentResultText = sourceText.value;
         sourceText.removeAttribute("placeholder");
-        sourceText.placeholer = "Type message text here";
-        translate();
+        sourceText.setAttribute('placeholder', 'Type message text here');
+        if(sourceText.value !== ''){
+            translate();
+        }
     } else if (radioButton1.checked && mode !== 1) {
         console.log("set mode 1");
         mode = 1;
-        sourceText.value = translationText.value;
+        currentSourceText = resultText.value;
+        sourceText.value = resultText.value;
+        currentResultText = sourceText.value;
         sourceText.removeAttribute("placeholder");
-        sourceText.placeholder = "Type morse code here, for example: .... . .-.. .-.. ---";
-        translate();
+        sourceText.setAttribute('placeholder', "Type morse code here, for example: .... . .-.. .-.. ---");
+        if(sourceText.value !== ''){
+            translate();
+        }
     } else{
         console.log('Already pressed');
+    }
+}
+
+function removeSpaces(){
+    //src
+    if(nr === 0 && (sourceText.value).indexOf(' ') !== -1 && sourceText.value.replaceAll(" ", "") !== currentSourceText){
+        console.log('remove spaces 0');
+        sourceOptionsUndo.push(sourceText.value);
+        sourceText.value = sourceText.value.replaceAll(" ", "");
+        currentSourceText = sourceText.value;
+        translate();
+    }
+    //result
+    else if (nr === 1 && (resultText.value).indexOf(' ') !== -1 && resultText.value.replaceAll(" ", "") !== currentSourceText){
+        console.log('remove spaces 1');
+        resultOptionsUndo.push(resultText.value);
+        resultText.value = resultText.value.replaceAll(" ", "");
+        currentResultText = resultText.value;
+    }
+    else{
+        console.log('Repeat: remove spaces');
+    }
+}
+function lettersOnly(){
+    //src
+    if(nr === 0){
+        console.log('letters only 0');
+        let tempSourceText = sourceText.value.replaceAll("0", "").replaceAll("1", "").replaceAll("2", "").replaceAll("3", "").replaceAll("4", "").replaceAll("5", "").replaceAll("6", "").replaceAll("7", "").replaceAll("8", "").replaceAll("9", "").replaceAll("&", "").replaceAll("'", "").replaceAll("@", "").replaceAll(")", "").replaceAll("(", "").replaceAll(":", "").replaceAll(",", "").replaceAll("=", "").replaceAll("!", "").replaceAll("+", "").replaceAll('"', '').replaceAll("?", "");
+        if(tempSourceText !== currentSourceText){
+            sourceOptionsUndo.push(sourceText.value);
+            sourceText.value = tempSourceText;
+            currentSourceText = sourceText.value;
+            translate();
+        }
+    }
+    //result
+    else if (nr === 1){
+        console.log('letters only 1');
+        let tempResultText = sourceText.value.replaceAll("0", "").replaceAll("1", "").replaceAll("2", "").replaceAll("3", "").replaceAll("4", "").replaceAll("5", "").replaceAll("6", "").replaceAll("7", "").replaceAll("8", "").replaceAll("9", "").replaceAll("&", "").replaceAll("'", "").replaceAll("@", "").replaceAll(")", "").replaceAll("(", "").replaceAll(":", "").replaceAll(",", "").replaceAll("=", "").replaceAll("!", "").replaceAll("+", "").replaceAll('"', '').replaceAll("?", "");
+        if(tempResultText !== currentResultText){
+            resultOptionsUndo.push(resultText.value);
+            resultText.value = tempResultText;
+            currentResulteText = resultText.value;
+        }
+    }
+    else{
+        console.log('Repeat: letters only');
+    }
+}
+
+function reverse(){
+    //src
+    if(nr === 0){
+        console.log('reverse 0');
+        sourceOptionsUndo.push(sourceText.value);
+        sourceText.value = sourceText.value.split("").reverse().join("");
+        currentSourceText = sourceText.value;
+        translate();
+    }
+    //result
+    else if (nr === 1){
+        console.log('reverse 1');
+        resultOptionsUndo.push(resultText.value);
+        resultText.value = resultText.value.split("").reverse().join("");
+        currentResultText = resultText.value;
+    }
+    else{
+        console.log('Repeat: reverse');
+    }
+}
+
+function upper(){
+    //src
+    if(nr === 0 && sourceText.value.toUpperCase() !== currentSourceText){
+        console.log('upper 0');
+        sourceOptionsUndo.push(sourceText.value);
+        sourceText.value = sourceText.value.toUpperCase();
+        currentSourceText = sourceText.value;
+        translate();
+    }
+    //result
+    else if (nr === 1 && resultText.value.toUpperCase() !== currentResultText){
+        console.log('upper 1');
+        resultOptionsUndo.push(resultText.value);
+        resultText.value = resultText.value.toUpperCase();
+        currentResultText = resultText.value;
+    }
+    else{
+        console.log('Repeat: upper');
+    }
+}
+
+function lower(){
+    //src
+    if(nr === 0 && sourceText.value.toLowerCase() !== currentSourceText){
+        console.log('lower 0');
+        sourceOptionsUndo.push(sourceText.value);
+        sourceText.value = sourceText.value.toLowerCase();
+        currentSourceText = sourceText.value;
+        translate();
+    }
+    //result
+    else if (nr === 1 && resultText.value.toLowerCase() !== currentResultText){
+        console.log('lower 1');
+        resultOptionsUndo.push(resultText.value);
+        resultText.value = resultText.value.toLowerCase();
+        currentResultText = resultText.value;
+    }
+    else{
+        console.log('Repeat: lower');
+    }
+}
+
+function undo(){
+    //src
+    if(nr === 0 && sourceOptionsUndo.length != 0){
+        console.log('undo 0');
+        sourceText.value = sourceOptionsUndo.pop();
+        currentSourceText = sourceText.value;
+        translate();
+    }
+    //result
+    else if (nr === 1 && resultOptionsUndo.length != 0){
+        console.log('undo 1');
+        resultText.value = resultOptionsUndo.pop();
+        currentResultText = resultText.value;
+    }
+    else{
+        console.log('Undo reached end');
+    }
+}
+
+function group(){
+    //src
+    if(nr === 0){
+        console.log('group 0');
+        sourceOptionsUndo.push(sourceText.value);
+        let tempSourceText = "";
+        for(let i = 0; i<sourceText.value.length; i++){
+            tempSourceText += sourceText.value[i];
+            if(i % parseInt(sourceOptions.groupNr.value) === 0 && i !== 0){
+                tempSourceText += " ";
+            }
+        }
+        sourceText.value = tempSourceText;
+        currentSourceText = sourceText.value;
+        translate();
+    }
+    //result
+    else if (nr === 1){
+        console.log('group 1');
+        resultOptionsUndo.push(resultText.value);
+        let tempResultText = "";
+        for(let i = 0; i<resultText.value.length; i++){
+            tempResultText += resultText.value[i];
+            if(i % parseInt(resultOptions.groupNr.value) === 0){
+                tempResultText += " ";
+            }
+        }
+        resultText.value = tempResultText;
+        currentResultText = resultText.value;
+    }
+    else{
+        console.log('Repeat: group');
     }
 }
 
 function reset(){
     mode = 0;
     sourceText.value = "";
-    translationText.value = "";
+    resultText.value = "";
     radioButton0.checked= "true";
+    sourceOptions.groupNr.value = "5";
+    resultOptions.groupNr.value = "5";
+    resultOptionsUndo.splice();
+    sourceOptionsUndo.splice();
 }
 
 // load event listeners
@@ -250,3 +433,66 @@ sourceText.addEventListener("keyup", translate);
 radioButton0.addEventListener('click', setMode);
 radioButton1.addEventListener('click', setMode);
 document.addEventListener('DOMContentLoaded', reset);
+
+sourceOptions.removeSpaces.addEventListener('click', function(){
+    nr = 0;
+    removeSpaces();
+});
+resultOptions.removeSpaces.addEventListener('click', function(){
+    nr = 1;
+    removeSpaces();
+});
+
+sourceOptions.lettersOnly.addEventListener('click', function(){
+    nr = 0;
+    lettersOnly();
+});
+resultOptions.lettersOnly.addEventListener('click', function(){
+    nr = 1;
+    lettersOnly();
+});
+
+sourceOptions.reverse.addEventListener('click', function(){
+    nr = 0;
+    reverse();
+});
+resultOptions.reverse.addEventListener('click', function(){
+    nr = 1;
+    reverse();
+});
+
+sourceOptions.upper.addEventListener('click', function(){
+    nr = 0;
+    upper();
+});
+resultOptions.upper.addEventListener('click', function(){
+    nr = 1;
+    upper();
+});
+
+sourceOptions.lower.addEventListener('click', function(){
+    nr = 0;
+    lower();
+});
+resultOptions.lower.addEventListener('click', function(){
+    nr = 1;
+    lower();
+});
+
+sourceOptions.undo.addEventListener('click', function(){
+    nr = 0;
+    undo();
+});
+resultOptions.undo.addEventListener('click', function(){
+    nr = 1;
+    undo();
+});
+
+sourceOptions.group.addEventListener('click', function(){
+    nr = 0;
+    group();
+});
+resultOptions.group.addEventListener('click', function(){
+    nr = 1;
+    group();
+});
