@@ -18,9 +18,8 @@ const sourceOptions = {
     groupNr: document.getElementById('src-options-group-nr'),
 }
 
-
 const resultCopyBtn = document.getElementById('result-copy');
-const resultOptionsBtn = document.getElementById('result-copy');
+const resultOptionsBtn = document.getElementById('result-options');
 const resultOptions = {
     removeSpaces: document.getElementById('result-opt-remove-spaces'),
     lettersOnly: document.getElementById('result-opt-letters-only'),
@@ -39,8 +38,13 @@ let currentResultText = "";
 
 let mode = 0;
 let nr = 0;
-let srcOptionsMode = 0;
-let resultOptionsMode = 0;
+let srcOptionsMode = false;
+let resultOptionsMode = false;
+
+
+if(navigator.userAgent.indexOf("Firefox") > 0) {
+    sourcePasteBtn.style.display = "none";
+}
 
 function textToMorse(){
     let originalText = sourceText.value.toUpperCase();
@@ -388,9 +392,9 @@ function group(){
         console.log('group 0');
         sourceOptionsUndo.push(sourceText.value);
         let tempSourceText = "";
-        for(let i = 0; i<sourceText.value.length; i++){
-            tempSourceText += sourceText.value[i];
-            if(i % parseInt(sourceOptions.groupNr.value) === 0 && i !== 0){
+        for(let i = 1; i<sourceText.value.length+1; i++){
+            tempSourceText += sourceText.value[i-1];
+            if(i % parseInt(sourceOptions.groupNr.value) === 0){
                 tempSourceText += " ";
             }
         }
@@ -403,8 +407,8 @@ function group(){
         console.log('group 1');
         resultOptionsUndo.push(resultText.value);
         let tempResultText = "";
-        for(let i = 0; i<resultText.value.length; i++){
-            tempResultText += resultText.value[i];
+        for(let i = 1; i<resultText.value.length+1; i++){
+            tempResultText += resultText.value[i-1];
             if(i % parseInt(resultOptions.groupNr.value) === 0){
                 tempResultText += " ";
             }
@@ -414,6 +418,56 @@ function group(){
     }
     else{
         console.log('Repeat: group');
+    }
+}
+
+function copy(){
+    //src
+    if(nr === 0){
+        sourceText.select();
+        // for mobile
+        sourceText.setSelectionRange(0, 99999);
+
+        navigator.clipboard.writeText(sourceText.value);
+    }
+    //result
+    else if (nr === 1){
+        resultText.select();
+        // for mobile
+        resultText.setSelectionRange(0, 99999);
+
+        navigator.clipboard.writeText(resultText.value);        
+    }
+}
+function paste(){
+    navigator.clipboard.readText().then(text => sourceText.value = text);
+    translate();
+}
+function hideOptions(){
+    //src
+    if(nr === 0){
+        if(srcOptionsMode){
+            srcOptionsMode = false;
+            document.getElementById("src-buttons-wrapper-options-1").style.display = "none";
+            document.getElementById("src-buttons-wrapper-options-2").style.display = "none";
+        } else {
+            srcOptionsMode = true;
+            document.getElementById("src-buttons-wrapper-options-1").style.display = "block";
+            document.getElementById("src-buttons-wrapper-options-2").style.display = "block";
+        }
+    }
+    //result
+    else if (nr === 1){
+        if(resultOptionsMode){
+            resultOptionsMode = false;
+            document.getElementById("result-buttons-wrapper-options-1").style.display = "none";
+            document.getElementById("result-buttons-wrapper-options-2").style.display = "none";
+        } else{
+            resultOptionsMode = true;
+            document.getElementById("result-buttons-wrapper-options-1").style.display = "block";
+            document.getElementById("result-buttons-wrapper-options-2").style.display = "block";
+        }
+
     }
 }
 
@@ -495,4 +549,24 @@ sourceOptions.group.addEventListener('click', function(){
 resultOptions.group.addEventListener('click', function(){
     nr = 1;
     group();
+});
+
+sourceCopyBtn.addEventListener('click', function(){
+    nr = 0;
+    copy();
+});
+resultCopyBtn.addEventListener('click', function(){
+    nr = 1;
+    copy();
+});
+
+sourcePasteBtn.addEventListener('click', paste);
+
+sourceOptionsBtn.addEventListener('click', function(){
+    nr = 0;
+    hideOptions();
+});
+resultOptionsBtn.addEventListener('click', function(){
+    nr = 1;
+    hideOptions();
 });
