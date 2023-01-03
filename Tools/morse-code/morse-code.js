@@ -440,8 +440,23 @@ function copy(){
     }
 }
 function paste(){
-    navigator.clipboard.readText().then(text => sourceText.value = text);
-    translate();
+    let pasteText = navigator.clipboard.readText();
+    console.log(pasteText);
+    if(currentSourceText !== pasteText){
+        if(sourceText.value !== ""){
+            sourceOptionsUndo.push(sourceText.value);
+        }
+        pasteText.then(function(text){
+            sourceText.value = text;
+            translate();
+        });
+        console.log(pasteText);
+        currentSourceText = sourceText.value;
+        curentResultText = resultText.value;
+    } else{
+        console.log('paste reached end');
+    }
+
 }
 function hideOptions(){
     //src
@@ -560,7 +575,10 @@ resultCopyBtn.addEventListener('click', function(){
     copy();
 });
 
-sourcePasteBtn.addEventListener('click', paste);
+sourcePasteBtn.addEventListener('click', function(){
+    nr = 0;
+    paste();
+});
 
 sourceOptionsBtn.addEventListener('click', function(){
     nr = 0;
