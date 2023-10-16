@@ -1,0 +1,69 @@
+.calculation-field{
+  background-color: #eeeedd;
+  color: black;
+  font-weight: bolder;
+}
+
+#src-buttons-wrapper-options-1{
+  display: none;
+}
+#src-buttons-wrapper-options-2{
+  display: none;
+}
+#result-buttons-wrapper-options-1{
+  display: none;
+}
+#result-buttons-wrapper-options-2{
+  display: none;
+}
+
+.custom-control-input:checked~.custom-control-label::before{
+  color: white;
+  border-color: #33331a;
+}
+.form-check-input:not(:checked){
+  border-radius: 15%;
+}
+.form-check-input:checked{
+  background-color:#33331a;
+  border-color:#33331a;
+  border-radius: 25%;
+}
+.form-check-input:focus{
+  box-shadow: none;
+  outline: 0;
+}
+.btn-success{
+  background-color:#33331a;
+  border-color:#33331a;
+}
+.btn-success:hover{
+  background-color:#54542b;
+  border-color:#54542b;
+}
+.btn-success:active{
+  background-color:#76763d;
+  border-color:#54542b;
+}
+.btn-success:focus{
+  background-color:#33331a;
+  border-color:#33331a;
+  box-shadow: none;
+}
+.btn-success:active:focus{
+  background-color:#76763d;
+  border-color:#54542b;
+  box-shadow: none;
+}
+.form-control{
+  font-size: 1.25rem;
+}
+.form-control:focus{
+  border-color:#76763d;
+  box-shadow: 0 0 0 .25rem rgba(51,51,26,.3);
+}
+.form-control-sm:focus-visible{
+  border-color:#76763d;
+  box-shadow: 0 0 0 .25rem rgba(51,51,26,.1);
+  outline: 0.25rem solid rgba(51,51,26,.1);
+}

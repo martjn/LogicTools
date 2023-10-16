@@ -499,7 +499,7 @@ function reset(){
 }
 
 // load event listeners
-sourceText.addEventListener("keydown", translate);
+sourceText.addEventListener("input", translate);
 radioButton0.addEventListener('click', setMode);
 radioButton1.addEventListener('click', setMode);
 document.addEventListener('DOMContentLoaded', reset);

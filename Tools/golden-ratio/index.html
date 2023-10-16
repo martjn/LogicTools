@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom CSS -->
+    <link href="../../main.css" rel="stylesheet" />
+    <link href="golden-ratio.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Franklin&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="text/javascript"
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    ></script>
+    <script type="text/javascript" src="./GOLDEN_RATIO_DIGITS.js"></script>
+
+    <title>Morse Code</title>
+  </head>
+  <body>
+    <!-- navigation menu -->
+    <nav
+      class="navbar navbar-dark bg-dark navbar-expand-sm sticky-top shadow-lg"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand mx-auto" href="../../">
+          <strong>L</strong>ogic<strong>T</strong>ools
+        </a>
+      </div>
+    </nav>
+    <header class="header">
+      <div class="container pt-5 pb-3">
+        <h1><strong>Numerical actions of Golden Ratio, Tools</strong></h1>
+      </div>
+    </header>
+    <container>
+      <div class="container-background pb-5">
+        <div class="container pt-5">
+          <p>
+            In mathematics, two quantities are in the golden ratio if their
+            ratio is the same as the ratio of their sum to the larger of the two
+            quantities. Expressed algebraically, for quantities a and b with a >
+            b > 0, \[{\displaystyle {\frac {a+b}{a}}={\frac {a}{b}}=\varphi }\]
+          </p>
+          <p>
+            where the Greek letter phi \[ \varphi \] or \[\phi \] denotes the golden
+            ratio. The constant \[\varphi\] satisfies the quadratic equation \[{\displaystyle \varphi ^{2}=\varphi +1}\] and is an irrational
+            number with a value of \[{\displaystyle \varphi ={\frac {1+{\sqrt {5}}}{2}}=1.618033988749....}\]
+          </p>
+          <div class="calculation-field row rounded-3">
+            <div class="col-md">
+              <div class="jumbotron pt-5 pb-5 px-4">
+                <!-- Source translation -->
+                <h2><strong>Euler's number</strong></h2>
+                <div>
+                  <span class="h4 d-inline">Mode:</span>
+                  <div class="d-flex flex-row form-check-inline gap-2">
+                    <input
+                      class="form-check-input align-self-center"
+                      type="radio"
+                      name="mode"
+                      id="textToMorseRadioBtn"
+                      checked
+                    />
+                    <label
+                      class="d-flex form-check-label align-self-center"
+                      for="mode"
+                    >
+                      First
+                    </label>
+                    <input
+                      class="form-check-input align-self-center"
+                      type="radio"
+                      name="mode"
+                      id="morseToTextRadioBtn"
+                      checked
+                    />
+                    <label
+                      class="d-flex form-check-label align-self-center"
+                      for="mode"
+                    >
+                      (nth)
+                    </label>
+                    <input
+                      name="mode"
+                      type="number"
+                      min="1"
+                      max="100000"
+                      value="5"
+                      class="form-control d-flex w-25"
+                      aria-describedby="inputGroup-sizing-sm"
+                      id="digits-input-field"
+                    />
+                    <label
+                      class="d-flex form-check-label align-self-center"
+                      for="mode"
+                    >
+                      digit(s) of <span class="fst-italic"> e</span>
+                    </label>
+                  </div>
+                </div>
+                <!-- Result translation -->
+                <h2><strong>Result</strong></h2>
+                <div class="form-group pt-3">
+                  <textarea
+                    readonly
+                    id="resulttext"
+                    class="form-control text-monospace"
+                    rows="6"
+                    spellcheck="false"
+                  >
+                  </textarea>
+                </div>
+                <div class="result-buttons-wrapper pb-3 pt-1">
+                  <button id="result-copy" class="btn btn-success">
+                    <i class="fa-solid fa-copy"></i> Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </container>
+    <footer class="bg-dark text-light pt-1 pb-2 text-center">
+      <div class="container">
+        <i>Copyright ©2023 The LogicTools project - All rights reserved</i>
+        <br />
+        <a
+          class="nav-link link-light"
+          href="https://github.com/martjn/LogicTools"
+          target="_blank"
+          ><i class="fa-brands fa-github"></i> Source code</a
+        >
+      </div>
+    </footer>
+
+    <!-- JS -->
+    <script
+      src="https://kit.fontawesome.com/b83cf0fab3.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+    <script src="golden-ratio.js"></script>
+  </body>
+</html>
