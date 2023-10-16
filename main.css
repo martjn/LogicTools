@@ -1,5 +1,5 @@
 * {
-    font-family: 'Times New Roman', Times, serif;
+  font-family: 'Roboto Slab', serif;
 }
 .header {
     background-color: #33331a;
@@ -27,4 +27,8 @@ container {
 
 .nav-link:hover{
     color: #336600;
+}
+svg{
+  width: 2rem;
+  height: 2rem;
 }
