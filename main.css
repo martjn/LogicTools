@@ -1,34 +1,114 @@
+
+nav, footer {
+  background-color: #001F3F;
+}
+nav a {
+  color: #FAFAFA;
+}
+footer {
+  color: white;
+}
 * {
   font-family: 'Roboto Slab', serif;
 }
 .header {
-    background-color: #33331a;
+    background-color: #17A2B8;
     color: white;
 }
 
 container {
-    background-color: #33331a;
+    background-color: #214245;
 }
 
 .tool-link {
     text-decoration: none;
-    color: #336600;
+    color: #016b7b;
 }
 
 .tool-link:hover {
     text-decoration: underline;
     font-weight: bolder;
-    color: #336600;
+    color: #016b7b;
 }
 
 .container-background {
-    background-color:#f6f6ee;
+    background-color:#FAFAFA;
+    color: black;
 }
 
 .nav-link:hover{
-    color: #336600;
+    color: #17A2B8;
 }
 svg{
   width: 2rem;
   height: 2rem;
+}
+
+.calculation-field{
+  background-color: #333333;
+  color: white;
+  font-weight: bolder;
+}
+
+#src-buttons-wrapper-options-1{
+  display: none;
+}
+#src-buttons-wrapper-options-2{
+  display: none;
+}
+#result-buttons-wrapper-options-1{
+  display: none;
+}
+#result-buttons-wrapper-options-2{
+  display: none;
+}
+.custom-control-input:checked~.custom-control-label::before{
+  color: white;
+  border-color: #D35400;
+}
+.form-check-input:not(:checked){
+  border-radius: 35%;
+}
+.form-check-input:checked{
+  background-color:#001F3F;
+  border-color:#001F3F;
+  border-radius: 35%;
+}
+.form-check-input:focus{
+  box-shadow: none;
+  outline: 0;
+}
+.btn-success{
+  background-color:#DAA520;
+  border-color:#DAA520;
+}
+.btn-success:hover{
+  background-color:#7f3300;
+  border-color:#7f3300;
+}
+.btn-success:active{
+  background-color:#7f3300;
+  border-color:#7f3300;
+}
+.btn-success:focus{
+  background-color:#7f3300;
+  border-color:#7f3300;
+  box-shadow: none;
+}
+.btn-success:active:focus{
+  background-color:#7f3300;
+  border-color:#7f3300;
+  box-shadow: none;
+}
+.form-control{
+  font-size: 1.25rem;
+}
+.form-control:focus{
+  border-color:#7f3300;
+  box-shadow: 0 0 0 .25rem rgba(51,51,26,.3);
+}
+.form-control-sm:focus-visible{
+  border-color:#7f3300;
+  box-shadow: 0 0 0 .25rem rgba(51,51,26,.1);
+  outline: 0.25rem solid rgba(51,51,26,.1);
 }

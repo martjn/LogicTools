@@ -24,10 +24,10 @@
 
     <title>LogicTools</title>
   </head>
-  <body>
+  <body class="h-100">
     <!-- navigation menu -->
     <nav
-      class="navbar navbar-dark bg-dark navbar-expand-sm sticky-top shadow-lg"
+      class="navbar"
     >
       <div class="container-fluid">
         <a class="navbar-brand mx-auto" href="#">
@@ -35,93 +35,102 @@
         </a>
       </div>
     </nav>
-    <header class="header">
-      <div class="container pt-5 pb-3">
-        <h1>
-          <strong
-            >Alphabet, Ciphering, Code-Breaking and other Solving Tools</strong
+    <div class="d-flex m-0 flex-column">
+      <header class="header">
+        <div class="container pt-5 pb-3">
+          <h1>
+            <strong
+              >Alphabet, Ciphering, Code-Breaking and other Solving
+              Tools</strong
+            >
+          </h1>
+          <p>
+            Free, open-source tools to help you with different translations.
+          </p>
+        </div>
+      </header>
+      <container>
+        <div class="container-background pb-5 vh-100">
+          <div class="container pt-5">
+            <h1 class="pb-2"><strong>Alphabets</strong></h1>
+            <p>
+              An alphabet is a standardized set of basic written graphemes
+              (called letters) that represent the phonemes of certain spoken
+              languages. Not all writing systems represent language in this way;
+              in a syllabary, each character represents a syllable, and
+              logographic systems use characters to represent words, morphemes,
+              or other semantic units.
+            </p>
+            <div class="row">
+              <div class="col-lg-4">
+                <i class="fa-solid fa-link"></i>
+                <a href="tools/morse-code/" class="tool-link">Morse Code</a>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="container pt-5">
+            <h1 class="pb-2"><strong>Classic Ciphers</strong></h1>
+            <p>
+              In the realm of cryptography, a cipher is a technique used to
+              secure data by encoding and decoding it. While most ciphers
+              necessitate a distinct key for both processes, some, such as ROT13
+              or Atbash, use predetermined keys. Historically, many of these
+              ciphers were crucial for military or other important purposes, but
+              nowadays, they are primarily employed by puzzle enthusiasts.
+            </p>
+            <div class="row">
+              <div class="col-lg-4">
+                <i class="fa-solid fa-link"></i>
+                <a href="tools/caesar-cipher/" class="tool-link"
+                  >Caesar Cipher</a
+                >
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="container pt-5 pb-5">
+            <h1 class="pb-2"><strong>Math</strong></h1>
+            <p>
+              Mathematics is crucial in solving logic puzzles and deciphering
+              codes. Converting between various number systems and recognizing
+              unique number characteristics, such as prime numbers, is
+              essential. Additionally, numerical sequences, such as the
+              Fibonacci series, frequently appear in puzzles.
+            </p>
+            <div class="row">
+              <div class="col-lg-4 d-flex">
+                <i class="fa-solid fa-link"></i>
+                <a href="tools/pi/" class="tool-link">Pi</a>
+              </div>
+              <div class="col-lg-4 d-flex">
+                <i class="fa-solid fa-link"></i>
+                <a href="tools/euler-number/" class="tool-link"
+                  >Euler's number (e)</a
+                >
+              </div>
+              <div class="col-lg-4 d-flex">
+                <i class="fa-solid fa-link"></i>
+                <a href="tools/golden-ratio/" class="tool-link">Golden Ratio</a>
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </container>
+      <footer class="pt-2 pb-2 text-center">
+        <div class="container">
+          <i>Copyright ©2023 The LogicTools project - All rights reserved</i>
+          <br />
+          <a
+            class="nav-link link-light"
+            href="https://github.com/martjn/LogicTools"
+            target="_blank"
+            ><i class="fa-brands fa-github"></i> Source code</a
           >
-        </h1>
-        <p>Free, open-source tools to help you with different translations.</p>
-      </div>
-    </header>
-    <container>
-      <div class="container-background">
-        <div class="container pt-5">
-          <h1 class="pb-2"><strong>Alphabets</strong></h1>
-          <p>
-            An alphabet is a standardized set of basic written graphemes (called
-            letters) that represent the phonemes of certain spoken languages.
-            Not all writing systems represent language in this way; in a
-            syllabary, each character represents a syllable, and logographic
-            systems use characters to represent words, morphemes, or other
-            semantic units.
-          </p>
-          <div class="row">
-            <div class="col-lg-4">
-              <i class="fa-solid fa-link"></i>
-              <a href="tools/morse-code/" class="tool-link">Morse Code</a>
-            </div>
-          </div>
-          <hr />
         </div>
-        <div class="container pt-5">
-          <h1 class="pb-2"><strong>Classic Ciphers</strong></h1>
-          <p>
-            In the realm of cryptography, a cipher is a technique used to secure
-            data by encoding and decoding it. While most ciphers necessitate a
-            distinct key for both processes, some, such as ROT13 or Atbash, use
-            predetermined keys. Historically, many of these ciphers were crucial
-            for military or other important purposes, but nowadays, they are
-            primarily employed by puzzle enthusiasts.
-          </p>
-          <div class="row">
-            <div class="col-lg-4">
-              <i class="fa-solid fa-link"></i>
-              <a href="tools/caesar-cipher/" class="tool-link">Caesar Cipher</a>
-            </div>
-          </div>
-          <hr />
-        </div>
-        <div class="container pt-5">
-          <h1 class="pb-2"><strong>Math</strong></h1>
-          <p>
-            Mathematics is crucial in solving logic puzzles and deciphering
-            codes. Converting between various number systems and recognizing
-            unique number characteristics, such as prime numbers, is essential.
-            Additionally, numerical sequences, such as the Fibonacci series,
-            frequently appear in puzzles.
-          </p>
-          <div class="row">
-            <div class="col-lg-4 d-flex">
-              <i class="fa-solid fa-link"></i>
-              <a href="tools/pi/" class="tool-link">Pi</a>
-            </div>
-            <div class="col-lg-4 d-flex">
-              <i class="fa-solid fa-link"></i>
-              <a href="tools/euler-number/" class="tool-link">Euler's number (e)</a>
-            </div>
-            <div class="col-lg-4 d-flex">
-              <i class="fa-solid fa-link"></i>
-              <a href="tools/golden-ratio/" class="tool-link">Golden Ratio</a>
-            </div>
-          </div>
-          <hr />
-        </div>
-      </div>
-    </container>
-    <footer class="bg-dark text-light pt-1 pb-2 text-center">
-      <div class="container">
-        <i>Copyright ©2022 The LogicTools project - All rights reserved</i>
-        <br />
-        <a
-          class="nav-link link-light"
-          href="https://github.com/martjn/LogicTools"
-          target="_blank"
-          ><i class="fa-brands fa-github"></i> Github</a
-        >
-      </div>
-    </footer>
+      </footer>
+    </div>
 
     <!-- JS -->
     <script
